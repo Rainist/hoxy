@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+isort --recursive --check-only hoxy tests
+if [ $? -ne 0 ]; then
+  echo "[!] isort failed! Run 'isort -rc -y hoxy tests'"
+  exit 1
+fi
+echo "[+] isort success!"
+
+black -S -l 79 --check hoxy tests
+if [ $? -ne 0 ]; then
+  echo "[!] black failed! Run 'black -S -l 79 hoxy tests'"
+  exit 1
+fi
+echo "[+] black success!"
+
+pylint hoxy
+if [ $? -ne 0 ]; then
+  echo "[!] pylint failed! Please fix code before push"
+  exit 1
+fi
+echo "[+] pylint success!"
+
+
+
+exit 0

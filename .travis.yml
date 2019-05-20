@@ -1,0 +1,25 @@
+sudo: required
+
+language: python
+
+dist:
+  - xenial
+
+python:
+  - "3.7"
+
+cache:
+  - pip
+
+before_install:
+  - pip install -U pip
+
+install:
+  - make
+
+script:
+  - make check
+  - make test
+
+after_success:
+  - bash < (curl -s https://codecov.io/bash)
