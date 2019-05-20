@@ -7,6 +7,7 @@ import aiohttp.client_exceptions as exc
 from aiohttp.client import ClientSession
 from aiohttp_ultrajson import get_json
 from sanic import Sanic, response
+from sanic_cors import CORS
 
 __version__ = '{0}.{1}.{2}'.format(*(0, 0, 1))
 
@@ -20,6 +21,8 @@ class ProxyConfiguration:
 
 app = Sanic(__name__)  # pylint: disable=invalid-name
 app.config.proxy = ProxyConfiguration(os.environ['HOXY_PROXY_BASE_URL'])
+
+CORS(app, automatic_options=True)
 
 
 @app.listener('before_server_start')

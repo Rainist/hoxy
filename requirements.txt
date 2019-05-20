@@ -1,3 +1,4 @@
 aiohttp[speedups]==3.5.4
 aiohttp-ultrajson==0.1.0
 sanic==19.3.1
+Sanic-Cors==0.9.8
