@@ -49,8 +49,12 @@ async def fetch(request) -> HTTPResponse:
 
 
 @app.get('/')
+async def ping(_):
+    return response.text(None)
+
+
 @app.get('/<p:path>')
-async def get(r, p=''):
+async def get(r, p):
     url = f'{r.app.config.proxy.base_url}/{p}?{r.query_string}'
     status, resp = await fetch(r.app.session.get(url))
     return response.json(resp, status=status)
