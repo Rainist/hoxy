@@ -1,4 +1,4 @@
-FROM python:3.7.3-alpine3.9 AS base
+FROM python:3.7.3-alpine3.10 AS base
 
 RUN pip install -U pip
 
@@ -13,7 +13,7 @@ COPY requirements.txt .
 RUN pip wheel -r requirements.txt
 
 # Execution Stage
-FROM build
+FROM base
 
 ENV PYTHONUNBUFFERED=1
 
